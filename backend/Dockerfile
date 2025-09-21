@@ -13,6 +13,8 @@ RUN pip install --no-cache-dir --upgrade -r /tmp/requirements.txt
 
 # Decode and create google-credentials.json from environment variable
 RUN echo $GOOGLE_CREDENTIALS_BASE64 | base64 -d > /tmp/google-credentials.json
+# Debug: Check if the credentials file is non-empty and show first 100 chars
+RUN echo "Debug: Size of google-credentials.json: $(wc -c < /tmp/google-credentials.json) bytes" && ls -la /tmp/google-credentials.json && echo "Debug: First 100 chars: $(head -c 100 /tmp/google-credentials.json)"
 
 # Final stage
 FROM python:3.11-slim
