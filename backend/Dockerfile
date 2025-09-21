@@ -4,6 +4,7 @@ FROM python:3.11 AS builder
 ENV PATH="/opt/venv/bin:$PATH"
 RUN python -m venv /opt/venv
 
+RUN echo "=== Debug: All Environment Variables ===" && env | sort && echo "=== End of Environment Variables ==="
 # Copy the build context to a temporary directory and list its contents
 COPY . /tmp/build-context
 RUN echo "Debug: Listing files in build context" && ls -la /tmp/build-context && pwd
